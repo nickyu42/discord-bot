@@ -1,0 +1,21 @@
+# Compiled shit
+__pycache__/
+*.py[cod]
+*$py.class
+
+# data files
+*.png
+*.gif
+*.jpg
+*.jpeg
+
+# databases
+*.db
+
+*.save
+
+# credentials
+credentials.json
+praw.ini
+
+*.idea
