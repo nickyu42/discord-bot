@@ -17,6 +17,7 @@ command_prefix = '<>'
 initial_extensions = [
     'cogs.admin',
     'cogs.reddit',
+    'cogs.users',
     'cogs.blackjack_single'
 ]
 
@@ -120,5 +121,10 @@ if __name__ == '__main__':
     credentials = load_credentials()
     try:
         bot.run(credentials['TOKEN'])
+    except Exception as e:
+        import cogs.utils.webhook as wh
+        print(wh.post_discord('Waifu bot notifier', str(e), credentials['WEBHOOK']))
     finally:
+        import cogs.utils.webhook as wh
+        wh.post_discord('Waifu bot notifier', 'Server closed', credentials['WEBHOOK'])
         sys.exit()

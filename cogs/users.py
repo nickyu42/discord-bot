@@ -76,8 +76,16 @@ class Users:
         """Sends an image of a trash can to the invoker's channel"""
         embed = discord.Embed(title='Kongou')
         embed.set_image(url="http://i.imgur.com/ODfJ5iv.png")
-                 
+
         await self.bot.say(embed=embed)
+
+    @commands.command()
+    async def bongo(self):
+        """Sends a random link of bongo cat from a youtube playlist"""
+        with open(os.getcwd() + '/cogs/users/bongo.txt', 'r') as f:
+            link = rnd.choice(list(f.readlines()))
+
+        await self.bot.say(link)
 
 
 def setup(bot):
