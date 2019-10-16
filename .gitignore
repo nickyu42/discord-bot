@@ -19,3 +19,6 @@ credentials.json
 praw.ini
 cogs/saucenaopy/saucenao.json
 *.idea
+
+# virtual environment
+venv

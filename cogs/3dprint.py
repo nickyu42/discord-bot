@@ -1,8 +1,6 @@
-import discord
 from discord.ext import commands
 from picamera import PiCamera
 from time import sleep
-from io import BytesIO
 from .utils import check
 
 

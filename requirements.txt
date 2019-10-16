@@ -1,4 +1,2 @@
-aiohttp>=1.0.0,<1.1.0
-websockets>=3.1,<4.0
-praw==4.4.0
-discord.py==0.16.7
+discord.py==1.2.3
+requests==2.22.0
