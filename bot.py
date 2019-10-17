@@ -138,7 +138,7 @@ async def on_ready():
 
 
 @bot.event
-async def on_command_error(exception, ctx: commands.Context):
+async def on_command_error(ctx: commands.Context, exception):
     log.error('[{0.author.name} | {0.timestamp}] {0.content}'.format(ctx.message))
     log.error(traceback.format_exception(type(exception), exception, exception.__traceback__))
 
