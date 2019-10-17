@@ -1,7 +1,6 @@
 from discord.ext import commands
 import glob
 
-from .utils import check
 from .utils.formatting import convert_to_codeblock
 
 
@@ -12,7 +11,7 @@ class Admin:
         self.bot = bot
 
     @commands.command(hidden=True)
-    @check.is_owner()
+    @commands.is_owner()
     async def load(self, *, module: str):
         """Loads a module"""
         module = 'cogs.' + module
@@ -25,7 +24,7 @@ class Admin:
             await self.bot.say('\N{OK HAND SIGN}')
 
     @commands.command(hidden=True)
-    @check.is_owner()
+    @commands.is_owner()
     async def unload(self, *, module: str):
         """Unloads a module"""
         module = 'cogs.' + module
@@ -38,7 +37,7 @@ class Admin:
             await self.bot.say('\N{OK HAND SIGN}')
 
     @commands.command(name='reload', hidden=True)
-    @check.is_owner()
+    @commands.is_owner()
     async def _reload(self, *, module: str):
         """Reloads a module."""
         module = 'cogs.' + module
@@ -52,7 +51,7 @@ class Admin:
             await self.bot.say('\N{OK HAND SIGN}')
 
     @commands.command(hidden=True)
-    @check.is_owner()
+    @commands.is_owner()
     async def reload_all(self):
         """Reloads all active modules with admin as last"""
         #TODO: finish
@@ -71,7 +70,7 @@ class Admin:
                 await self.bot.say('\N{OK HAND SIGN}')
 
     @commands.command(hidden=True)
-    @check.is_owner()
+    @commands.is_owner()
     async def status(self):
         """Displays a page with a table of all modules"""
 
