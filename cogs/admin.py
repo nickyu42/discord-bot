@@ -12,47 +12,47 @@ class Admin(commands.Cog):
 
     @commands.command(hidden=True)
     @commands.is_owner()
-    async def load(self, *, module: str):
+    async def load(self, ctx: commands.Context, *, module: str):
         """Loads a module"""
         module = 'cogs.' + module
         try:
             self.bot.load_extension(module)
         except Exception as e:
-            await self.bot.say('\N{PISTOL}')
-            await self.bot.say('{}: {}'.format(type(e).__name__, e))
+            await ctx.send('\N{PISTOL}')
+            await ctx.send('{}: {}'.format(type(e).__name__, e))
         else:
-            await self.bot.say('\N{OK HAND SIGN}')
+            await ctx.send('\N{OK HAND SIGN}')
 
     @commands.command(hidden=True)
     @commands.is_owner()
-    async def unload(self, *, module: str):
+    async def unload(self, ctx: commands.Context, *, module: str):
         """Unloads a module"""
         module = 'cogs.' + module
         try:
             self.bot.unload_extension(module)
         except Exception as e:
-            await self.bot.say('\N{PISTOL}')
-            await self.bot.say('{}: {}'.format(type(e).__name__, e))
+            await ctx.send('\N{PISTOL}')
+            await ctx.send('{}: {}'.format(type(e).__name__, e))
         else:
-            await self.bot.say('\N{OK HAND SIGN}')
+            await ctx.send('\N{OK HAND SIGN}')
 
     @commands.command(name='reload', hidden=True)
     @commands.is_owner()
-    async def _reload(self, *, module: str):
+    async def _reload(self, ctx: commands.Context, *, module: str):
         """Reloads a module."""
         module = 'cogs.' + module
         try:
             self.bot.unload_extension(module)
             self.bot.load_extension(module)
         except Exception as e:
-            await self.bot.say('\N{PISTOL}')
-            await self.bot.say('{}: {}'.format(type(e).__name__, e))
+            await ctx.send('\N{PISTOL}')
+            await ctx.send('{}: {}'.format(type(e).__name__, e))
         else:
-            await self.bot.say('\N{OK HAND SIGN}')
+            await ctx.send('\N{OK HAND SIGN}')
 
     @commands.command(hidden=True)
     @commands.is_owner()
-    async def reload_all(self):
+    async def reload_all(self, ctx: commands.Context):
         """Reloads all active modules with admin as last"""
         #TODO: finish
 
@@ -64,14 +64,14 @@ class Admin(commands.Cog):
                 self.bot.unload_extension(module_name)
                 self.bot.load_extension(module_name)
             except Exception as e:
-                await self.bot.say('\N{PISTOL}')
-                await self.bot.say('{}: {}'.format(type(e).__name__, e))
+                await ctx.send('\N{PISTOL}')
+                await ctx.send('{}: {}'.format(type(e).__name__, e))
             else:
-                await self.bot.say('\N{OK HAND SIGN}')
+                await ctx.send('\N{OK HAND SIGN}')
 
     @commands.command(hidden=True)
     @commands.is_owner()
-    async def status(self, ctx):
+    async def status(self, ctx: commands.Context):
         """Displays a page with a table of all modules"""
 
         all_modules = glob.glob('./cogs/*.py')
