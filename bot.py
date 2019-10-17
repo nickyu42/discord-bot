@@ -166,11 +166,11 @@ def load_credentials():
 if __name__ == '__main__':
     credentials = load_credentials()
     log = setup_logging('discord.log')
-    webhook = discord.Webhook.from_url(credentials['WEBHOOK'])
+    webhook = discord.Webhook.from_url(credentials['WEBHOOK'], adapter=discord.RequestsWebhookAdapter())
 
     try:
         bot.run(credentials['TOKEN'])
     except Exception as ex:
-        await webhook.send(str(ex), username='Holo')
+        webhook.send(str(ex), username='Holo')
     finally:
-        await webhook.send('Server closed', username='Holo')
+        webhook.send('Server closed', username='Holo')

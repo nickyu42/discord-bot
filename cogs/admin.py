@@ -4,7 +4,7 @@ import glob
 from .utils.formatting import convert_to_codeblock
 
 
-class Admin:
+class Admin(commands.Cog):
     """Commands only admin can use"""
 
     def __init__(self, bot):
