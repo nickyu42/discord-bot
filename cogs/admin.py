@@ -71,7 +71,7 @@ class Admin(commands.Cog):
 
     @commands.command(hidden=True)
     @commands.is_owner()
-    async def status(self):
+    async def status(self, ctx):
         """Displays a page with a table of all modules"""
 
         all_modules = glob.glob('./cogs/*.py')
@@ -93,7 +93,7 @@ class Admin(commands.Cog):
 
         table = header + ''.join(lines)
 
-        await self.bot.say(convert_to_codeblock(table))
+        await ctx.send(convert_to_codeblock(table))
 
 
 def setup(bot):
