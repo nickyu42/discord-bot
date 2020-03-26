@@ -71,6 +71,13 @@ class Admin(commands.Cog):
 
     @commands.command(hidden=True)
     @commands.is_owner()
+    async def clear(self, ctx: commands.Context, *, number: int):
+       channel = ctx.message.channel
+       msgs = [msg async for msg in channel.history(limit=number)]
+       await channel.delete_messages(msgs)
+
+    @commands.command(hidden=True)
+    @commands.is_owner()
     async def status(self, ctx: commands.Context):
         """Displays a page with a table of all modules"""
 

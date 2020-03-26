@@ -171,6 +171,6 @@ if __name__ == '__main__':
     try:
         bot.run(credentials['TOKEN'])
     except Exception as ex:
-        webhook.send(str(ex), username='Holo')
+        webhook.send(f'Exception occured: {repr(ex)}', username='Holo')
     finally:
         webhook.send('Server closed', username='Holo')

@@ -1,4 +1,4 @@
-import discord 
+import discord
 from discord.ext import commands
 import os
 import random as rnd
@@ -24,28 +24,28 @@ HELP_MESSAGE = """\
 """
 
 
-class Users:
+class Users(discord.ext.commands.Cog):
     """Basic commands for users"""
 
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command(name='commands')
-    async def command(self):
+    async def command(self, ctx):
         """Sends a private message to the sender with all available commands"""
-        await self.bot.whisper(HELP_MESSAGE)
+        await ctx.author.send(HELP_MESSAGE)
 
     @commands.command()
-    async def say(self, *, text: str):
+    async def say(self, ctx, *, text: str):
         """Makes the bot say something"""
         if text:
-            await self.bot.say(''.join(text))
+            await ctx.send(''.join(text))
 
     @commands.command(pass_context=True)
     async def tts(self, ctx, *, text: str):
         """Makes the bot say something with text-to-speech"""
         if text:
-            await self.bot.send_message(ctx.message.channel, text, tts=True)
+            await ctx.send(ctx.message.channel, text, tts=True)
 
     @commands.command(pass_context=True)
     async def hello(self, ctx, member: discord.Member = None):
@@ -57,7 +57,7 @@ class Users:
         greeting = rnd.choice(["Kon'nichiwa ", "Moshi moshi "])
         affix = rnd.choice(["-chan", "-sama", "-san", "-kun"])
 
-        await self.bot.say(greeting + author + affix)
+        await ctx.send(greeting + author + affix)
 
     @commands.command(name='nb')
     async def nosebleed(self):
@@ -69,7 +69,7 @@ class Users:
         image_name = rnd.choice(images)
 
         with open(path + image_name, 'rb') as f:
-            await self.bot.upload(f)
+            await ctx.upload(f)
 
     @commands.command()
     async def kongou(self):
@@ -77,7 +77,7 @@ class Users:
         embed = discord.Embed(title='Kongou')
         embed.set_image(url="http://i.imgur.com/ODfJ5iv.png")
 
-        await self.bot.say(embed=embed)
+        await ctx.send(embed=embed)
 
     @commands.command()
     async def bongo(self):
@@ -85,8 +85,13 @@ class Users:
         with open(os.getcwd() + '/cogs/users/bongo.txt', 'r') as f:
             link = rnd.choice(list(f.readlines()))
 
-        await self.bot.say(link)
+        await ctx.send(link)
 
+    @commands.command(hidden=True)
+    @commands.is_owner()
+    async def presence(self, ctx, *, text: str):
+        await self.bot.change_presence(activity=discord.Game(text))
+        await ctx.send(f'Changed to {text}')
 
 def setup(bot):
     bot.add_cog(Users(bot))
